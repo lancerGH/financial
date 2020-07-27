@@ -28,12 +28,12 @@ import pandas as pd
 
 lg=bs.login()
 
-portfolio_name="sh.000001"
+portfolio_name="sh.601398"
 s_date ="2010-01-01"
 e_date = "2019-12-31"
 
 #导入投资组合历史数据,对象portfolio
-portfolio = bs.query_history_k_data_plus("portfolio_name","date,pctChg",                        
+portfolio = bs.query_history_k_data_plus("sh.600000","date,pctChg",                        
     start_date= s_date, end_date= e_date, frequency="d", adjustflag="2")
 #把投资组合历史数据清理成可用的DataFrame数据结构，对象portfolio_data
 data_list=[]
