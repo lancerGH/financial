@@ -28,7 +28,7 @@ import pandas as pd
 
 lg=bs.login()
 
-portfolio_name="sh.601398"
+portfolio_name="sh.008903"
 s_date ="2010-01-01"
 e_date = "2019-12-31"
 
@@ -42,4 +42,6 @@ while (portfolio.error_code == '0') & portfolio.next():
 portfolio_data=pd.DataFrame(data_list,columns=portfolio.fields)
 #结果集输出到CSV文件
 portfolio_data.to_csv("portfolio_history_data.csv",index=False)
+
+
 bs.logout()
