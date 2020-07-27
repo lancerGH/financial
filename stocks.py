@@ -29,19 +29,30 @@ import pandas as pd
 lg=bs.login()
 
 portfolio_name="sh.008903"
+market_name="sh.000001"
 s_date ="2010-01-01"
 e_date = "2019-12-31"
 
-#导入投资组合历史数据,对象portfolio
+#1-1导入投资组合历史数据,对象portfolio
 portfolio = bs.query_history_k_data_plus(portfolio_name,"date,pctChg",                        
     start_date= s_date, end_date= e_date, frequency="d", adjustflag="2")
-#把投资组合历史数据清理成可用的DataFrame数据结构，对象portfolio_data
+#1-2把投资组合历史数据清理成可用的DataFrame数据结构，对象portfolio_data
 data_list=[]
 while (portfolio.error_code == '0') & portfolio.next():
     data_list.append(portfolio.get_row_data())
 portfolio_data=pd.DataFrame(data_list,columns=portfolio.fields)
-#结果集输出到CSV文件
+#1-3结果集输出到CSV文件
 portfolio_data.to_csv("portfolio_history_data.csv",index=False)
 
+#2-1导入市场历史数据
+market = bs.query_history_k_data_plus(market_name,"date,pctChg",                        
+    start_date= s_date, end_date= e_date, frequency="d", adjustflag="2")
+#2-2把投资组合历史数据清理成可用的DataFrame数据结构
+data_list=[]
+while (market.error_code == '0') & market.next():
+    data_list.append(market.get_row_data())
+market_data=pd.DataFrame(data_list,columns=market.fields)
+#2-3结果集输出到CSV文件
+market_data.to_csv("market_history_data.csv",index=False)
 
 bs.logout()
